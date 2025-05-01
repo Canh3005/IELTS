@@ -3,7 +3,7 @@ namespace MyMvcBackend.Models
     public class UserTestResults
     {
         public int Id { get; set; }
-        public float  Accuracy { get; set; }
+        public float?  Accuracy { get; set; }
         public float  Score { get; set; }
         public DateTime TestDate { get; set; } = DateTime.Now;
         public string TestType { get; set; } = string.Empty;

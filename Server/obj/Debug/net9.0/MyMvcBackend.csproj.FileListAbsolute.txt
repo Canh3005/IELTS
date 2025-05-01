@@ -470,3 +470,5 @@ D:\Project2\MyMvcBackend\Server\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.
 D:\Project2\MyMvcBackend\Server\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Project2\MyMvcBackend\Server\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Project2\MyMvcBackend\Server\obj\Debug\net9.0\MyMvcBackend.MvcApplicationPartsAssemblyInfo.cs
+D:\Project2\MyMvcBackend\Server\obj\Debug\net9.0\MyMvcBackend.sourcelink.json
+D:\Project2\MyMvcBackend\Server\bin\Debug\net9.0\Newtonsoft.Json.dll

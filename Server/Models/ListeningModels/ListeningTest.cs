@@ -7,7 +7,7 @@ namespace MyMvcBackend.Models
         public DateTime CreatedAt { get; set; }
 
         public int Duration { get; set; } // Duration in minutes
-        public int NumberOfQuestions { get; set; } // Total number of questions in the test
+        public int? NumberOfQuestions { get; set; } // Total number of questions in the test
         public string? Type { get; set; } // Type of the test (e.g., listening, reading, writing, speaking etc.)
 
         // Navigation property for related questions

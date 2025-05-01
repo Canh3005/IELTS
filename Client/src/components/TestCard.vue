@@ -12,8 +12,11 @@
       <p class="text-gray-600 text-sm mb-1">
         <strong>Duration:</strong> {{ test.duration }} minutes
       </p>
-      <p class="text-gray-600 text-sm">
+      <p v-if="test.type != 'Writing'" class="text-gray-600 text-sm">
         <strong>Number of Questions:</strong> {{ test.numberOfQuestions }}
+      </p>
+      <p v-if="test.type == 'Writing'" class="text-gray-600 text-sm">
+        <strong>Number of Tasks:</strong> 2
       </p>
     </div>
   </router-link>

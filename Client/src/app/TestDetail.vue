@@ -169,8 +169,11 @@ const formatDateToDDMMYYYY = (dateString) => {
           >
             <p><strong>Created At:</strong> {{ formatDate(test.createdAt) }}</p>
             <p><strong>Duration:</strong> {{ test.duration }} minutes</p>
-            <p>
+            <p v-if="test.type != 'Writing'">
               <strong>Number of Questions:</strong> {{ test.numberOfQuestions }}
+            </p>
+            <p v-if="test.type == 'Writing'">
+              <strong>Number of Tasks:</strong> 2
             </p>
           </div>
           <div v-if="Array.isArray(results) && results.length > 0">
@@ -317,7 +320,7 @@ const formatDateToDDMMYYYY = (dateString) => {
               class="p-2 bg-orange-100 text-orange-700 rounded-md mb-2 flex items-center"
             >
               <img
-                src="../assets/Warning.png"
+                src="../assets/warning.png"
                 alt=""
                 class="mr-2 inline-block"
               />
@@ -335,7 +338,6 @@ const formatDateToDDMMYYYY = (dateString) => {
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 

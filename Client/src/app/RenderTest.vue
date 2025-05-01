@@ -22,7 +22,7 @@
             {{ recording.title }}
           </li>
         </ul>
-        <div class="mt-4">
+        <div class="mt-4" v-if="testType === 'Listening'">
           <audio
             ref="audioPlayer"
             controls
@@ -205,6 +205,424 @@
             </div>
           </div>
         </div>
+        <div
+          v-else-if="testType === 'Writing'"
+          class="flex flex-row mt-4 gap-2 border-b-4 border-gray-300"
+        >
+          <!-- Phần hiển thị đề bài -->
+          <div class="flex flex-col w-1/2 bg-white rounded-lg">
+            <div
+              v-html="selectedRecording.passage"
+              class="p-4 bg-gray-100 rounded-lg"
+            ></div>
+            <div>
+              <div class="p-4 bg-gray-100 rounded-lg mt-4 shadow-md">
+                <p class="text-teal-500 font-bold text-lg mb-4">Your Answer</p>
+
+                <textarea
+                  v-if="selectedRecording.id"
+                  v-model="writingAnswers[selectedRecording.id]"
+                  placeholder="Write your answer here..."
+                  class="w-full p-4 resize-none bg-white overflow-y-auto rounded-lg"
+                  style="max-height: 700px; min-height: 550px"
+                ></textarea>
+                <div
+                  class="flex flex-row justify-between items-center p-4 bg-white rounded-lg"
+                >
+                  <p class="text-sm text-gray-500">
+                    Word Count: <strong>{{ wordCount }}</strong>
+                  </p>
+                  <button
+                    class="bg-teal-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-600 cursor-pointer"
+                    @click="submitWritingAnswers"
+                  >
+                    Submit Answer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col w-1/2 rounded-lg shadow-md bg-white">
+            <div
+              class="flex flex-row text-lg font-bold text-teal-500 text-center rounded-lg"
+            >
+              <button
+                class="w-1/2 p-4 rounded-lg"
+                :class="{
+                  'opacity-50 cursor-not-allowed': !selectedRecording?.audioUrl,
+                  'text-teal-500 bg-gray-100': !showImage,
+                  'text-white bg-teal-500': showImage,
+                  'cursor-pointer': selectedRecording?.audioUrl,
+                }"
+                @click="showImage = true"
+                :disabled="!selectedRecording?.audioUrl"
+              >
+                Image
+              </button>
+              <button
+                class="w-1/2 p-4 cursor-pointer rounded-lg"
+                @click="showImage = false"
+                :class="{
+                  'text-teal-500 bg-gray-100': showImage,
+                  'text-white bg-teal-500': !showImage,
+                }"
+              >
+                AI Feedback
+              </button>
+            </div>
+
+            <!-- Hiển thị hình ảnh -->
+            <div
+              v-if="showImage"
+              class="overflow-y-auto rounded-lg bg-white mt-2"
+              style="max-height: 740px; min-height: 700px"
+            >
+              <img
+                v-if="selectedRecording?.audioUrl"
+                :src="selectedRecording.audioUrl"
+                class="p-4"
+              />
+              <p v-else class="text-center text-gray-500 p-4">
+                No image available for this task.
+              </p>
+            </div>
+
+            <!-- Hiển thị AI Feedback -->
+            <div v-else>
+              <div
+                v-if="!isSubmitting && !isSubmitted"
+                class="text-center p-6 mt-2 text-gray-500"
+              >
+                <i
+                  >Your AI feedback will appear here after you submit your
+                  answer.</i
+                >
+              </div>
+              <div
+                v-else-if="isSubmitting && !isSubmitted"
+                class="text-center text-gray-500 p-6"
+              >
+                <div
+                  class="flex flex-col items-center justify-center space-y-3 text-gray-500"
+                >
+                  <!-- Spinner Icon -->
+                  <svg
+                    class="animate-spin h-8 w-8 text-teal-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+
+                  <!-- Loading Text -->
+                  <p class="italic">
+                    Analyzing your writing... Please wait a moment.
+                  </p>
+                </div>
+              </div>
+
+              <div v-else class="text-center text-teal-600 p-4 space-y-8">
+                <div v-if="aiFeedback">
+                  <!-- Task 1 Feedback -->
+                  <div
+                    class="bg-white shadow-md rounded-xl border border-gray-100 p-6"
+                  >
+                    <h3
+                      class="text-xl font-bold mb-4 flex items-center justify-center text-teal-500"
+                    >
+                      <svg
+                        class="w-6 h-6 mr-2 text-teal-500"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M9 12l2 2l4 -4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="9"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      Task 1 Feedback
+                    </h3>
+                    <div
+                      class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left text-gray-700"
+                    >
+                      <p>
+                        <strong>TR (Task Response):&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task1.tr.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p>
+                        <strong>CC (Coherence & Cohesion):&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task1.cc.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p>
+                        <strong>LR (Lexical Resource):&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task1.lr.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p>
+                        <strong
+                          >GRA (Grammatical Range & Accuracy):&nbsp;</strong
+                        >
+                        <span class="text-gray-600">{{
+                          aiFeedback.task1.gra.toFixed(1)
+                        }}</span>
+                      </p>
+                    </div>
+                    <div class="mt-4 text-left text-gray-700">
+                      <p>
+                        <strong>Score:&nbsp;</strong>
+                        <span class="text-gray-800 font-semibold">{{
+                          aiFeedback.task1.score.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p class="mt-2">
+                        <strong>Feedback:&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task1.feedback
+                        }}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Task 2 Feedback -->
+                  <div
+                    class="bg-white shadow-md rounded-xl border border-gray-100 p-6 mt-4"
+                  >
+                    <h3
+                      class="text-xl font-bold mb-4 flex items-center justify-center text-teal-500"
+                    >
+                      <svg
+                        class="w-6 h-6 mr-2 text-teal-500"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M9 12l2 2l4 -4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="9"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      Task 2 Feedback
+                    </h3>
+                    <div
+                      class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left text-gray-700"
+                    >
+                      <p>
+                        <strong>TR (Task Response):&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task2.tr.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p>
+                        <strong>CC (Coherence & Cohesion):&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task2.cc.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p>
+                        <strong>LR (Lexical Resource):&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task2.lr.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p>
+                        <strong
+                          >GRA (Grammatical Range & Accuracy):&nbsp;</strong
+                        >
+                        <span class="text-gray-600">{{
+                          aiFeedback.task2.gra.toFixed(1)
+                        }}</span>
+                      </p>
+                    </div>
+                    <div class="mt-4 text-left text-gray-700">
+                      <p>
+                        <strong>Score:&nbsp;</strong>
+                        <span class="text-gray-800 font-semibold">{{
+                          aiFeedback.task2.score.toFixed(1)
+                        }}</span>
+                      </p>
+                      <p class="mt-2">
+                        <strong>Feedback:&nbsp;</strong>
+                        <span class="text-gray-600">{{
+                          aiFeedback.task2.feedback
+                        }}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          v-else-if="testType === 'Speaking'"
+          class="flex flex-row mt-4 gap-4 border-b-4 border-gray-300"
+        >
+          <div class="flex flex-col w-1/2 bg-white rounded-lg">
+            <!-- Phần hiển thị đề bài -->
+            <div
+              v-html="selectedRecording.passage"
+              class="p-4 bg-gray-100 rounded-lg"
+            ></div>
+
+            <div
+              class="bg-white p-6 rounded-xl shadow-md border border-gray-100 mt-6"
+            >
+              <h3 class="text-lg font-bold text-teal-500 mb-4">
+                Your Speaking Recording
+              </h3>
+
+              <!-- Thời gian ghi âm -->
+              <div class="text-center text-2xl font-mono text-gray-700 mb-4">
+                {{ formatTime(recordingTime) }}
+              </div>
+
+              <!-- Nút điều khiển -->
+              <div class="flex justify-center gap-4">
+                <button
+                  class="bg-teal-500 text-white py-2 px-6 rounded-lg hover:bg-teal-600 transition"
+                  @click="startRecording"
+                  :disabled="isRecording"
+                >
+                  🎙️ Start
+                </button>
+                <button
+                  class="bg-red-500 text-white py-2 px-6 rounded-lg hover:bg-red-600 transition"
+                  @click="stopRecording"
+                  :disabled="!isRecording"
+                >
+                  ⏹ Stop
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col w-1/2 rounded-lg shadow-md bg-white">
+            <div
+              class="flex flex-row text-lg font-bold text-teal-500 text-center rounded-lg"
+            >
+              <button
+                class="w-1/2 p-4 rounded-lg cursor-pointer"
+                :class="
+                  activeTab === 'transcript'
+                    ? 'text-white bg-teal-500'
+                    : 'text-teal-500 bg-gray-100'
+                "
+                @click="activeTab = 'transcript'"
+              >
+                Transcript
+              </button>
+              <button
+                class="w-1/2 p-4 cursor-pointer rounded-lg"
+                @click="activeTab = 'aiFeedback'"
+                :class="
+                  activeTab === 'aiFeedback'
+                    ? 'text-white bg-teal-500'
+                    : 'text-teal-500 bg-gray-100'
+                "
+              >
+                AI Feedback
+              </button>
+            </div>
+
+            <!-- Hiển thị hình ảnh -->
+            <div
+              v-if="activeTab === 'transcript'"
+              class="text-center p-6 mt-2 text-gray-500"
+            >
+              <i
+                >Your transcript will appear here after you submit your
+                answer.</i
+              >
+            </div>
+
+            <!-- Hiển thị AI Feedback -->
+            <div v-else>
+              <div
+                v-if="activeTab === 'aiFeedback'"
+                class="text-center p-6 mt-2 text-gray-500"
+              >
+                <i
+                  >Your AI feedback will appear here after you submit your
+                  answer.</i
+                >
+              </div>
+              <div
+                v-else-if="isSubmitting && !isSubmitted"
+                class="text-center text-gray-500 p-6"
+              >
+                <div
+                  class="flex flex-col items-center justify-center space-y-3 text-gray-500"
+                >
+                  <!-- Spinner Icon -->
+                  <svg
+                    class="animate-spin h-8 w-8 text-teal-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+
+                  <!-- Loading Text -->
+                  <p class="italic">
+                    Analyzing your speaking... Please wait a moment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="flex flex-row justify-end mt-4">
           <button
             class="flex flex-row items-center cursor-pointer"
@@ -234,6 +652,7 @@
           </p>
         </div>
         <button
+          v-if="testType !== 'Writing' && testType !== 'Speaking'"
           class="bg-white text-teal-500 border-2 border-teal-500 font-bold p-2 rounded-[33px] pl-4 pr-4 hover:bg-teal-500 hover:text-white transition-colors duration-300 ease-in-out cursor-pointer mt-4"
           @click="submitTest"
         >
@@ -246,7 +665,7 @@
 
 <script setup>
 import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted, watch, onUnmounted, computed } from "vue";
+import { ref, onMounted, watch, onUnmounted, computed, reactive } from "vue";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
@@ -261,10 +680,12 @@ const audioPlayer = ref(null);
 const currentTimes = ref({}); // Lưu thời gian đã nghe cho từng URL
 const questionsByPart = ref({}); // Khởi tạo biến questions để lưu trữ câu hỏi
 const answersByQuestion = ref({}); // Khởi tạo biến answers để lưu trữ câu trả lời
-const totalTime = 40 * 60; // 40 phút (đổi sang giây)
+const totalTime = ref(null); // 40 phút (đổi sang giây)
 const timeRemaining = ref(totalTime); // Thời gian còn lại (giây)
 const userAnswers = ref({}); // Khởi tạo biến userAnswers để lưu trữ câu trả lời của người dùng
 const testName = ref(""); // Khởi tạo biến testName để lưu trữ tên bài test
+const test = ref({}); // Khởi tạo biến test để lưu trữ thông tin bài test
+const writingAnswers = ref({}); // Khởi tạo biến writingAnswers để lưu trữ câu trả lời của người dùng cho phần viết
 
 const parseListOfQuestions = (listOfQuestion) => {
   if (!listOfQuestion) return [];
@@ -353,6 +774,8 @@ onMounted(async () => {
     const responseTest = await axios.get(
       `http://localhost:5004/api/listening/${testId}`
     ); // Gọi API để lấy thông tin bài test
+    test.value = responseTest.data; // Lưu thông tin bài test vào biến test
+    totalTime.value = responseTest.data.duration * 60; // Lưu thời gian bài test vào biến totalTime
     testName.value = responseTest.data.title; // Lưu tên bài test vào biến testName
     console.log("Test Name:", testName.value); // In ra tên bài test
     const response = await axios.get(
@@ -393,6 +816,17 @@ watch(audioUrl, (newUrl) => {
     };
   }
 });
+// Mỗi khi `selectedRecording` thay đổi, đảm bảo tạo key trước
+watch(selectedRecording, (newVal) => {
+  console.log("Selected Recording ID:", newVal?.id);
+  console.log(
+    "Parts for Selected Recording:",
+    partsByRecording.value[newVal?.id]
+  );
+  if (newVal?.id && writingAnswers.value[newVal.id] === undefined) {
+    writingAnswers.value[newVal.id] = "";
+  }
+});
 
 const testType = ref(""); // Khởi tạo biến testType để lưu trữ loại bài kiểm tra
 const numberOfQuestions = ref(0); // Khởi tạo biến numberOfQuestions để lưu trữ số lượng câu hỏi
@@ -407,7 +841,6 @@ const fetchRecordingDetails = async (recordingId) => {
     testType.value = response.data.testType;
     console.log("Test Type:", testType.value); // In ra loại bài kiểm tra
     numberOfQuestions.value = response.data.numberOfQuestions; // Lưu số lượng câu hỏi vào biến numberOfQuestions
-    console.log("Recording Details:", audioUrl.value); // In ra thông tin bản ghi
   } catch (error) {
     console.error("Error fetching recording details:", error);
   }
@@ -423,7 +856,6 @@ const fetchParts = async (recordingId) => {
       // Gọi fetchQuestions cho từng part
       fetchQuestions(part.id);
     });
-    console.log("Parts:", partsByRecording.value[recordingId]); // In ra dữ liệu parts
   } catch (error) {
     console.error("Error fetching parts:", error);
   }
@@ -435,7 +867,6 @@ const fetchQuestions = async (partId) => {
       `http://localhost:5004/api/questions/by-part/${partId}`
     ); // Gọi API để lấy câu hỏi theo partId
     questionsByPart.value[partId] = response.data;
-    console.log(`Questions by part ${partId}:`, response.data); // In ra dữ liệu câu hỏi
 
     // Theo dõi câu hỏi của partId
     // Gọi fetchAnswers trực tiếp cho từng câu hỏi
@@ -454,7 +885,6 @@ const fetchAnswers = async (questionId) => {
       `http://localhost:5004/api/answers/by-question/${questionId}`
     ); // Gọi API để lấy câu hỏi theo partId
     answersByQuestion.value[questionId] = response.data;
-    console.log(`Answers by question ${questionId}:`, response.data); // In ra dữ liệu câu hỏi
   } catch (error) {
     console.error("Error fetching questions:", error);
   }
@@ -470,12 +900,11 @@ const submitTest = async () => {
     // Nếu người dùng nhấn Cancel, thoát khỏi hàm
     return;
   }
-  // console.log("Submitting test with answers:", userAnswers.value); // In ra câu trả lời của người dùng
+
   try {
     const totalQuestion = numberOfQuestions.value; // Đếm số lượng câu hỏi
     const correctAnswers = calculateCorrectAnswers(); // Tính số câu trả lời đúng
     const accuracy = (correctAnswers / totalQuestion) * 100; // Tính độ chính xác
-    console.log("Total Questions:", numberOfQuestions.value); // In ra tổng số câu hỏi
     const score = correctAnswers * 10;
 
     const timeTaken = formatTime(totalTime - timeRemaining.value); // Tính thời gian đã sử dụng
@@ -513,15 +942,12 @@ const submitTest = async () => {
       answers: answers, // Câu trả lời của người dùng
     };
 
-    console.log("Payload:", payload);
-
     // Gửi dữ liệu đến API
     const response = await axios.post(
       "http://localhost:5004/api/submit-test",
       payload
     );
 
-    console.log(response.data.message);
     alert("Test submitted successfully!");
 
     const testResultId = response.data.testResultId;
@@ -550,9 +976,6 @@ const calculateCorrectAnswers = () => {
       (answer) => answer.isCorrect
     )?.answerText;
 
-    console.log(
-      `Question ID: ${questionId}, User Answer: ${userAnswer}, Correct Answer: ${correctAnswer}`
-    ); // In ra thông tin câu hỏi và câu trả lời
     if (
       userAnswer &&
       correctAnswer &&
@@ -561,7 +984,6 @@ const calculateCorrectAnswers = () => {
       correctAnswers++;
     }
   }
-  console.log("Correct Answers:", correctAnswers); // In ra số câu trả lời đúng
 
   return correctAnswers;
 };
@@ -584,7 +1006,153 @@ const getUserIdFromToken = () => {
 };
 
 const userId = getUserIdFromToken();
-console.log("User ID:", userId); // In ra ID người dùng từ token
+
+// Đếm số từ trong câu trả lời
+const wordCount = computed(() => {
+  if (!selectedRecording.value || !selectedRecording.value.id) return 0;
+  const answer = writingAnswers.value[selectedRecording.value.id] || "";
+  return answer.trim() === "" ? 0 : answer.trim().split(/\s+/).length;
+});
+
+const showImage = ref(true); // Mặc định hiển thị hình ảnh
+const isSubmitted = ref(false); // Trạng thái đã nộp bài
+const aiFeedback = ref(""); // Phản hồi từ AI
+
+const isSubmitting = ref(false); // Trạng thái đang gửi bài
+const submitWritingAnswers = async () => {
+  try {
+    isSubmitting.value = true; // Đặt trạng thái đang gửi bài
+    showImage.value = false; // Chuyển sang chế độ hiển thị phản hồi AI
+    const task1Prompt = `You are an IELTS Writing Task 1 evaluator. 
+Below is a task and a student's answer. Evaluate it based on IELTS Writing band descriptors 
+(Task Achievement, Coherence & Cohesion, Lexical Resource, Grammatical Range & Accuracy). 
+Give overall feedback and an estimated band score (0-9).
+
+Task:
+${recordings.value[0].passage}
+
+Student's Answer:
+${writingAnswers.value[recordings.value[0].id]}
+
+Image (if any):
+${recordings.value[0].audioUrl || "No image"}
+`;
+
+    const task2Prompt = `You are an IELTS Writing Task 2 evaluator.
+Evaluate the following essay based on IELTS Writing band descriptors 
+(Task Response, Coherence & Cohesion, Lexical Resource, Grammatical Range & Accuracy). 
+Give overall feedback and an estimated band score (0-9).
+
+Task:
+${recordings.value[1].passage}
+
+Student's Answer:
+${writingAnswers.value[recordings.value[1].id]}
+Returns the result in JSON format as follows:
+
+{
+"task1": {
+"score": 7.5,
+"task response": 7.0,
+"coherence & cohesion": 8.0,
+"lexical resource": 8.0,
+"grammatical range & accuracy": 8.0,
+"feedback": "Overall feedback on task 1..."
+},
+"task2": {
+"score": 8.0,
+"task response": 8.0,
+"coherence & cohesion": 8.0,
+"lexical resource": 8.0,
+"grammatical range & accuracy": 8.0,
+"feedback": "Overall feedback on task 2..."
+}
+}
+`;
+
+    const payload = {
+      task1Prompt,
+      task2Prompt,
+    };
+
+    console.log("Payload:", payload);
+
+    const response = await fetch(
+      "http://localhost:5004/api/writing/submit-to-feedback",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Gửi bài thất bại!");
+    }
+
+    const result = await response.json();
+    console.log("Đánh giá từ AI:", result);
+
+    aiFeedback.value = result;
+    isSubmitting.value = false; // Đặt trạng thái không còn gửi bài
+
+    isSubmitted.value = true;
+
+    alert("Đã gửi bài viết thành công!");
+  } catch (error) {
+    console.error("Lỗi khi gửi bài:", error);
+  }
+};
+const activeTab = ref("transcript"); // Mặc định hiển thị transcript
+let mediaRecorder;
+let audioChunks = [];
+
+const isRecording = ref(false);
+const recordingTime = ref(0);
+let timer = null;
+
+// Bắt đầu ghi âm
+const startRecording = async () => {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = new MediaRecorder(stream);
+  audioChunks = [];
+  recordingTime.value = 0;
+  isRecording.value = true;
+
+  mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(audioChunks, { type: "audio/webm" });
+    const audioUrl = URL.createObjectURL(blob);
+    console.log("Audio ready:", audioUrl); // <-- để xử lý tiếp như gửi lên server
+  };
+
+  mediaRecorder.start();
+  startTimer();
+};
+
+// Dừng ghi âm
+const stopRecording = () => {
+  if (mediaRecorder && isRecording.value) {
+    mediaRecorder.stop();
+    stopTimer();
+    isRecording.value = false;
+  }
+};
+
+// Bắt đầu đếm thời gian
+const startTimer = () => {
+  timer = setInterval(() => {
+    recordingTime.value++;
+  }, 1000);
+};
+
+// Dừng đếm thời gian
+const stopTimer = () => {
+  clearInterval(timer);
+  timer = null;
+};
 </script>
 
 <style scoped>

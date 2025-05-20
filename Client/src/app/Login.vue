@@ -25,10 +25,13 @@ const login = async () => {
     return;
   }
   try {
-    const response = await axios.post("http://localhost:5004/api/auth/login", {
-      email: email.value,
-      password: password.value,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
+      {
+        email: email.value,
+        password: password.value,
+      }
+    );
     message.value = response.data.message;
     if (response.data.message === "Login successful.") {
       isSuccess.value = true;

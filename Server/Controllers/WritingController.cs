@@ -43,9 +43,9 @@ namespace MyMvcBackend.Controllers
 
             // Khởi tạo HttpClient
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
-            client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:5173");
-    client.DefaultRequestHeaders.Add("X-Title", "MyIELTSApp");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
+            client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:8080");
+            client.DefaultRequestHeaders.Add("X-Title", "MyIELTSApp");
 
             // Xây dựng payload (body) để gửi tới API
             var deepSeekPayload = new
@@ -65,11 +65,14 @@ namespace MyMvcBackend.Controllers
             // Kiểm tra phản hồi từ API
             if (!response.IsSuccessStatusCode)
             {
-                return StatusCode((int)response.StatusCode, "Error from DeepSeek");
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("Error Response: " + errorContent);
+                return StatusCode((int)response.StatusCode, errorContent);
             }
 
             // Đọc và trả về nội dung phản hồi từ API
             var responseBody = await response.Content.ReadAsStringAsync();
+            
             // Bước 1: Parse phản hồi gốc
 var json = JObject.Parse(responseBody);
 var rawContent = json["choices"]?[0]?["message"]?["content"]?.ToString();
@@ -105,6 +108,20 @@ var result = new
     task2 = new { score = task2Score, tr = task2TR, cc = task2CC, lr = task2LR, gra = task2GRA, feedback = task2Feedback }
 };
 
+var testResult = new UserTestResults
+{
+    UserId = request.UserId, // Thay đổi theo ID người dùng thực tế
+    TestId = request.TestId, // Thay đổi theo ID bài kiểm tra thực tế
+    Accuracy = 0, // Chưa có thông tin này từ API
+    Score = (float)(task1Score + task2Score) / 2, // Tính điểm trung bình của cả hai bài kiểm tra
+    TestType = "Writing",
+    TimeTaken = request.TimeTaken, // Chưa có thông tin này từ API
+    TestDate = DateTime.Now,
+};
+
+_context.UserTestResults.Add(testResult);
+await _context.SaveChangesAsync();
+
 return Ok(result);
         }
     }
@@ -114,5 +131,10 @@ return Ok(result);
     {
         public string Task1Prompt { get; set; }
         public string Task2Prompt { get; set; }
+        public int UserId { get; set; } // ID người dùng (nếu cần thiết)
+        public int TestId { get; set; } // ID bài kiểm tra (nếu cần thiết)
+        public float Score { get; set; } // Điểm (nếu cần thiết)
+        public string TimeTaken { get; set; } // Thời gian làm bài (nếu cần thiết)
+        public string TestType { get; set; } // Loại bài kiểm tra (nếu cần thiết)
     }
 }

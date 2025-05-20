@@ -21,18 +21,18 @@ onMounted(async () => {
   document.title = "Test Result";
   try {
     const response = await axios.get(
-      `http://localhost:5004/api/results/${testResultId}`
+      `${import.meta.env.VITE_BASE_URL}/api/results/${testResultId}`
     );
     const testId = response.data.testId;
     const testResponse = await axios.get(
-      `http://localhost:5004/api/listening/${testId}`
+      `${import.meta.env.VITE_BASE_URL}/api/listening/${testId}`
     );
     test.value = testResponse.data;
     console.log(test.value);
     result.value = response.data;
     console.log(result.value);
     const answerResponse = await axios.get(
-      `http://localhost:5004/api/results/${testResultId}/answers`
+      `${import.meta.env.VITE_BASE_URL}/api/results/${testResultId}/answers`
     );
     answers.value = answerResponse.data;
     console.log(answers.value);

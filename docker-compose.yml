@@ -1,35 +1,29 @@
-version: "3.8"
-
 services:
   backend:
+    container_name: backend
     build:
       context: ./Server
       dockerfile: Dockerfile
     ports:
       - "5004:5004"
-    volumes:
-      - ./Server:/app # Mount thư mục Server vào container
-      - /app/bin # Ignore thư mục bin
-      - /app/obj # Ignore thư mục obj
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
     depends_on:
       - db
 
   frontend:
+    container_name: frontend
     build:
       context: ./Client
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
-    volumes:
-      - ./Client:/app # Mount thư mục Client vào container
-      - /app/node_modules # Ignore node_modules để tránh lỗi
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5004
     depends_on:
       - backend
+      - db
 
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql_server
     ports:
       - "1433:1433"

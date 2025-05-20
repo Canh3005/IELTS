@@ -13,7 +13,9 @@ const filteredTests = ref([]);
 // Fetch data from API
 const fetchTests = async () => {
   try {
-    const response = await axios.get("http://localhost:5004/api/listening");
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/listening`
+    );
     tests.value = response.data;
     updateFilteredTests(); // Update filtered tests after fetching
   } catch (error) {

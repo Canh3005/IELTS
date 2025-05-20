@@ -41,7 +41,7 @@ const register = async () => {
   }
   try {
     const response = await axios.post(
-      "http://localhost:5004/api/auth/register",
+      `${import.meta.env.VITE_BASE_URL}/api/auth/register`,
       {
         username: username.value,
         email: email.value,

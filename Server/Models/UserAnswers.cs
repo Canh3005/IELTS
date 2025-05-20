@@ -7,7 +7,6 @@ public class UserAnswer
     public int TestResultId { get; set; } // Khóa ngoại đến bảng kết quả bài thi
     public int? QuestionId { get; set; }
 
-    public string? TaskId {get; set;} = string.Empty; 
     public string UAnswer { get; set; } = string.Empty;
     public string? CorrectAnswer { get; set; } = string.Empty;
 

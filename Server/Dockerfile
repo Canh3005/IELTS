@@ -1,21 +1,26 @@
-# Use an official .NET 9.0 runtime as a parent image
+# Base image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
 EXPOSE 5004
 
-# Use an official .NET 9.0 SDK as a build image
+# Thêm dòng này để ASP.NET lắng nghe mọi IP (không chỉ localhost)
+ENV ASPNETCORE_URLS=http://+:5004
+
+# Build image
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-COPY ["MyMvcBackend.csproj", "./"]
-RUN dotnet restore "./MyMvcBackend.csproj"
+
+# Copy toàn bộ source code backend
 COPY . .
-WORKDIR "/src/"
-RUN dotnet build "MyMvcBackend.csproj" -c Release -o /app/build
+
+# Khai báo tên project chính xác tại đây (đường dẫn tương đối từ /src)
+RUN dotnet restore "./MyMvcBackend.csproj"
+RUN dotnet build "./MyMvcBackend.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MyMvcBackend.csproj" -c Release -o /app/publish
+RUN dotnet publish "./MyMvcBackend.csproj" -c Release -o /app/publish
 
-# Final stage: runtime
+# Final runtime
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

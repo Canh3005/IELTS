@@ -17,7 +17,9 @@ const answersRight = ref(null);
 
 const fetchTest = async (id) => {
   try {
-    const response = await fetch(`http://localhost:5004/api/listening/${id}`);
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/listening/${id}`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -25,9 +27,9 @@ const fetchTest = async (id) => {
     test.value = data;
     console.log("Test type:", test.value.type); // Log type để kiểm tra
     const resultResponse = await fetch(
-      `http://localhost:5004/api/results/test/${id}/user/${localStorage.getItem(
-        "userid"
-      )}`
+      `${
+        import.meta.env.VITE_BASE_URL
+      }/api/results/test/${id}/user/${localStorage.getItem("userid")}`
     );
     results.value = await resultResponse.json();
     console.log("Results:", results.value);
@@ -38,7 +40,9 @@ const fetchTest = async (id) => {
 
 const fetchAnswers = async (testId) => {
   try {
-    const response = await fetch(`http://localhost:5004/api/answers/${testId}`);
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/answers/${testId}`
+    );
     const data = await response.json();
     answers.value = data;
     console.log("Answers:", answers.value);

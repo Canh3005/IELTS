@@ -64,7 +64,7 @@ namespace MyMvcBackend.Controllers
                     new Claim(ClaimTypes.Name, existingUser.Username),
                     new Claim(ClaimTypes.Email, existingUser.Email),
                 }),
-                Expires = DateTime.UtcNow.AddHours(1), 
+                Expires = DateTime.UtcNow.AddHours(24), 
                 Issuer = "MyMvcBackend",
                 Audience = "MyMvcBackend",
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -72,10 +72,13 @@ namespace MyMvcBackend.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            return Ok(new { message = "Login successful.",
-                token = tokenString, 
+            return Ok(new
+            {
+                message = "Login successful.",
+                token = tokenString,
                 username = existingUser.Username,
                 userId = existingUser.Id.ToString(),
+                role = existingUser.Role
             });
         }
     }

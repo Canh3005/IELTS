@@ -30,7 +30,7 @@
             v-if="audioUrl"
             key="audioUrl"
           >
-            <source :src="audioUrl" type="audio/mpeg" />
+            <source :src="getAudioSrc(audioUrl)" type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -574,7 +574,7 @@
             </div>
 
             <!-- Hiển thị hình ảnh -->
-            <div v-if="activeTab === 'transcript'">
+            <div v-if="activeTab === 'transcript'" class="text-center p-6 mt-2">
               <i
                 v-if="!isSubmitted && !isSubmitting && !aiFeedback"
                 class="text-center p-6 mt-2 text-gray-500"
@@ -1011,6 +1011,7 @@
           v-if="testType === 'Speaking'"
           class="bg-white text-teal-500 border-2 border-teal-500 font-bold p-2 rounded-[33px] pl-4 pr-4 hover:bg-teal-500 hover:text-white transition-colors duration-300 ease-in-out cursor-pointer mt-4"
           @click="submitSpeakingAnswers"
+          :disabled="isSubmitted"
         >
           Submit Test
         </button>
@@ -1024,7 +1025,7 @@ import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, watch, onUnmounted, computed, reactive } from "vue";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { Play, Pause } from "lucide-vue-next";
+import { Pause, Play } from "lucide-vue-next";
 
 const router = useRouter();
 const route = useRoute();
@@ -1049,6 +1050,12 @@ const parseListOfQuestions = (listOfQuestion) => {
   const [start, end] = listOfQuestion.split("-").map(Number);
   if (isNaN(start) || isNaN(end)) return [];
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+};
+
+const getAudioSrc = (url) => {
+  if (!url) return "";
+  if (url.startsWith("http")) return url;
+  return import.meta.env.VITE_BASE_URL + url;
 };
 
 const goToNextRecording = async () => {
@@ -1256,12 +1263,32 @@ const submitTest = async () => {
     // Nếu người dùng nhấn Cancel, thoát khỏi hàm
     return;
   }
+  function calculateIELTSListeningScore(correctAnswers) {
+    if (correctAnswers >= 39) return 9.0;
+    if (correctAnswers >= 37) return 8.5;
+    if (correctAnswers >= 35) return 8.0;
+    if (correctAnswers >= 32) return 7.5;
+    if (correctAnswers >= 30) return 7.0;
+    if (correctAnswers >= 26) return 6.5;
+    if (correctAnswers >= 23) return 6.0;
+    if (correctAnswers >= 18) return 5.5;
+    if (correctAnswers >= 16) return 5.0;
+    if (correctAnswers >= 13) return 4.5;
+    if (correctAnswers >= 10) return 4.0;
+    if (correctAnswers >= 8) return 3.5;
+    if (correctAnswers >= 6) return 3.0;
+    if (correctAnswers >= 4) return 2.5;
+    if (correctAnswers === 3) return 2.0;
+    if (correctAnswers === 2) return 1.5;
+    if (correctAnswers === 1) return 1.0;
+    return 0;
+  }
 
   try {
     const totalQuestion = numberOfQuestions.value; // Đếm số lượng câu hỏi
     const correctAnswers = calculateCorrectAnswers(); // Tính số câu trả lời đúng
     const accuracy = (correctAnswers / totalQuestion) * 100; // Tính độ chính xác
-    const score = correctAnswers * 10;
+    const score = calculateIELTSListeningScore(correctAnswers);
 
     const timeTaken = formatTime(totalTime.value - timeRemaining.value); // Tính thời gian đã sử dụng
     const answers = Object.keys(answersByQuestion.value).map((questionId) => {
@@ -1460,7 +1487,13 @@ Returns the result in JSON format as follows:
 
     isSubmitted.value = true;
 
-    alert("Đã gửi bài viết thành công!");
+    // Dừng timer khi đã nộp bài
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    alert("Successfully submitted the writing!");
   } catch (error) {
     console.error("Lỗi khi gửi bài:", error);
   }
@@ -1678,7 +1711,7 @@ Prompt: ${recordings.value[2].passage}
 Transcript recorded by student, listen it: ${
       transcripts.value[recordings.value[2].id]
     }
-If the student doesn't answer, return same format and fill in the score with -1, feedback with "No answer", transcript with "No answer".`;
+If the student doesn't answer, return same format and fill in the score with 0, feedback with "No answer", transcript with "No answer".`;
 
     const payload = {
       speakingPrompt,
@@ -1713,7 +1746,13 @@ If the student doesn't answer, return same format and fill in the score with -1,
 
     isSubmitted.value = true;
 
-    alert("Successfully submitted the writing!");
+    // Dừng timer khi đã nộp bài
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    alert("Successfully submitted the speaking test!");
   } catch (error) {
     console.error("Lỗi khi gửi bài:", error);
   }

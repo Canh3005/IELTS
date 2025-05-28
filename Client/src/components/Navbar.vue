@@ -85,13 +85,6 @@ onMounted(() => {
             >Speaking</router-link
           >
         </li>
-        <li>
-          <router-link
-            to="/exam"
-            class="text-white !no-underline hover:after:bg-[white] hover:scale-110 transition-transform duration-200 inline-block"
-            >Test</router-link
-          >
-        </li>
       </ul>
 
       <template v-if="isLoggedIn">

@@ -13,4 +13,9 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      quill: "quill/dist/quill.js", // Đảm bảo sử dụng quill.js
+    },
+  },
 });

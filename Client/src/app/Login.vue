@@ -38,6 +38,7 @@ const login = async () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", response.data.username);
       localStorage.setItem("userid", response.data.userId);
+      localStorage.setItem("role", response.data.role);
       alert("Login successful! Redirecting to home page...");
       window.location.href = "/";
     } else {

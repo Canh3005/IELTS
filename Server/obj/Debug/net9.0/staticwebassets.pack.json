@@ -5,6 +5,42 @@
       "PackagePath": "staticwebassets\\MyMvcBackend.chy7s24x70.bundle.scp.css"
     },
     {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\23c07c92-1774-462a-bc95-02ffa49ec242.mp3",
+      "PackagePath": "staticwebassets\\audio\\23c07c92-1774-462a-bc95-02ffa49ec242.mp3"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\31b67664-4782-4695-8dca-f8a5310147e0.mp3",
+      "PackagePath": "staticwebassets\\audio\\31b67664-4782-4695-8dca-f8a5310147e0.mp3"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\5c96a73e-6da2-4ff2-bd25-d48baee30c3a.mp3",
+      "PackagePath": "staticwebassets\\audio\\5c96a73e-6da2-4ff2-bd25-d48baee30c3a.mp3"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\661d1fc0-e9f7-45e6-96e4-f8035b98e010.mp3",
+      "PackagePath": "staticwebassets\\audio\\661d1fc0-e9f7-45e6-96e4-f8035b98e010.mp3"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\93b0c466-edab-4e36-8e73-3f51ab6e01cb.m4a",
+      "PackagePath": "staticwebassets\\audio\\93b0c466-edab-4e36-8e73-3f51ab6e01cb.m4a"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\a72db449-aa1f-45fe-a3ee-a87a81489d56.mp3",
+      "PackagePath": "staticwebassets\\audio\\a72db449-aa1f-45fe-a3ee-a87a81489d56.mp3"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\af8fd60e-2da6-4bd5-b254-9ad2656a55b9.m4a",
+      "PackagePath": "staticwebassets\\audio\\af8fd60e-2da6-4bd5-b254-9ad2656a55b9.m4a"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\c86d3bba-6b26-4c19-b8d3-c109bee98a1b.mp3",
+      "PackagePath": "staticwebassets\\audio\\c86d3bba-6b26-4c19-b8d3-c109bee98a1b.mp3"
+    },
+    {
+      "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\audio\\e9d786e2-6656-4a94-a7bd-4760711fb71f.mp3",
+      "PackagePath": "staticwebassets\\audio\\e9d786e2-6656-4a94-a7bd-4760711fb71f.mp3"
+    },
+    {
       "Id": "D:\\Project2\\MyMvcBackend\\Server\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

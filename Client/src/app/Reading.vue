@@ -9,6 +9,7 @@ const tests = ref([]);
 const searchQuery = ref("");
 const sortOption = ref("Newest");
 const filteredTests = ref([]);
+const userRole = ref(localStorage.getItem("role"));
 
 // Fetch data from API
 const fetchTests = async () => {
@@ -80,6 +81,13 @@ onMounted(() => {
             <option value="Latest">Latest</option>
           </select>
         </div>
+        <button
+          v-if="userRole === 'Admin'"
+          class="text-white bg-teal-500 p-2 rounded-lg hover:bg-teal-600 hover:text-white cursor-pointer w-[150px] h-12 ml-auto"
+          @click="$router.push({ name: 'CreateReadingTest' })"
+        >
+          Create Test
+        </button>
       </div>
     </div>
 

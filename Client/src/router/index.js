@@ -10,6 +10,10 @@ import Writing from "../app/Writing.vue";
 import TestDetail from "../app/TestDetail.vue";
 import RenderTest from "../app/RenderTest.vue";
 import TestResult from "../app/TestResult.vue";
+import CreateWritingTest from "../app/CreateWritingTest.vue";
+import CreateSpeakingTest from "../app/CreateSpeakingTest.vue";
+import CreateListeningTest from "../app/CreateListeningTest.vue";
+import CreateReadingTest from "../app/CreateReadingTest.vue";
 
 const routes = [
   { path: "/", component: Home }, // Route cho trang Home
@@ -38,6 +42,34 @@ const routes = [
     meta: { requiresAuth: true },
     name: "TestResult",
   },
+  {
+    path: "/create-writing-test",
+    name: "CreateWritingTest",
+    component: CreateWritingTest,
+    meta: { requiresAuth: true },
+  },
+  // Route cho trang CreateWritingTest
+  {
+    path: "/create-speaking-test",
+    name: "CreateSpeakingTest",
+    component: CreateSpeakingTest,
+    meta: { requiresAuth: true },
+  },
+  // Route cho trang CreateSpeakingTest
+  {
+    path: "/create-listening-test",
+    name: "CreateListeningTest",
+    component: CreateListeningTest,
+    meta: { requiresAuth: true },
+  },
+  // Route cho trang CreateListeningTest
+  {
+    path: "/create-reading-test",
+    name: "CreateReadingTest",
+    component: CreateReadingTest,
+    meta: { requiresAuth: true },
+  },
+  // Route cho trang CreateReadingTest
 ];
 
 const router = createRouter({

@@ -40,7 +40,7 @@ namespace MyMvcBackend.Controllers
 
             // Khởi tạo HttpClient
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
             client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:8080");
             client.DefaultRequestHeaders.Add("X-Title", "MyIELTSApp");
 
@@ -68,106 +68,156 @@ namespace MyMvcBackend.Controllers
 
             // Đọc và trả về nội dung phản hồi từ API
             var responseBody = await response.Content.ReadAsStringAsync();
-            
+
 
             // Bước 1: Parse phản hồi gốc
 
-var json = JObject.Parse(responseBody);
+            var json = JObject.Parse(responseBody);
 
 
-var rawContent = json["choices"]?[0]?["message"]?["content"]?.ToString();
+            var rawContent = json["choices"]?[0]?["message"]?["content"]?.ToString();
 
-// Bước 2: Làm sạch đoạn ```json ... ```
-string cleanedContent = rawContent
-    .Replace("```json", "")
-    .Replace("```", "")
-    .Trim();
+            // Bước 2: Làm sạch đoạn ```json ... ```
+            string cleanedContent = rawContent
+                .Replace("```json", "")
+                .Replace("```", "")
+                .Trim();
 
-// Bước 3: Parse JSON thực sự bên trong content
-// Parse JSON thực sự bên trong content
-var feedbackJson = JObject.Parse(cleanedContent);
-Console.WriteLine("Response Body: " + feedbackJson.ToString());
+            // Bước 3: Parse JSON thực sự bên trong content
+            // Parse JSON thực sự bên trong content
+            var feedbackJson = JObject.Parse(cleanedContent);
+            Console.WriteLine("Response Body: " + feedbackJson.ToString());
 
-// Lấy thông tin Part 1
-var part1Transcript = feedbackJson["part1"]?["transcript"]?.ToString() ?? "No answer";
-var part1Feedback = feedbackJson["part1"]?["feedback"]?.ToString() ?? "No feedback";
-var part1Score = feedbackJson["part1"]?["score"]?.ToObject<int>() ?? -1;
-var part1FC = feedbackJson["part1"]?["fluency and coherence"]?.ToObject<int>() ?? -1;
-var part1LR = feedbackJson["part1"]?["lexical resource"]?.ToObject<int>() ?? -1;
-var part1GRA = feedbackJson["part1"]?["grammatical range and accuracy"]?.ToObject<int>() ?? -1;
-var part1PR = feedbackJson["part1"]?["pronunciation"]?.ToObject<int>() ?? -1;
+            // Lấy thông tin Part 1
+            var part1Transcript = feedbackJson["part1"]?["transcript"]?.ToString() ?? "No answer";
+            var part1Feedback = feedbackJson["part1"]?["feedback"]?.ToString() ?? "No feedback";
+            var part1Score = feedbackJson["part1"]?["score"]?.ToObject<int>() ?? -1;
+            var part1FC = feedbackJson["part1"]?["fluency and coherence"]?.ToObject<int>() ?? -1;
+            var part1LR = feedbackJson["part1"]?["lexical resource"]?.ToObject<int>() ?? -1;
+            var part1GRA = feedbackJson["part1"]?["grammatical range and accuracy"]?.ToObject<int>() ?? -1;
+            var part1PR = feedbackJson["part1"]?["pronunciation"]?.ToObject<int>() ?? -1;
 
-// Lấy thông tin Part 2
-var part2Transcript = feedbackJson["part2"]?["transcript"]?.ToString() ?? "No answer";
-var part2Feedback = feedbackJson["part2"]?["feedback"]?.ToString() ?? "No feedback";
-var part2Score = feedbackJson["part2"]?["score"]?.ToObject<int>() ?? -1;
-var part2FC = feedbackJson["part2"]?["fluency and coherence"]?.ToObject<int>() ?? -1;
-var part2LR = feedbackJson["part2"]?["lexical resource"]?.ToObject<int>() ?? -1;
-var part2GRA = feedbackJson["part2"]?["grammatical range and accuracy"]?.ToObject<int>() ?? -1;
-var part2PR = feedbackJson["part2"]?["pronunciation"]?.ToObject<int>() ?? -1;
+            // Lấy thông tin Part 2
+            var part2Transcript = feedbackJson["part2"]?["transcript"]?.ToString() ?? "No answer";
+            var part2Feedback = feedbackJson["part2"]?["feedback"]?.ToString() ?? "No feedback";
+            var part2Score = feedbackJson["part2"]?["score"]?.ToObject<int>() ?? -1;
+            var part2FC = feedbackJson["part2"]?["fluency and coherence"]?.ToObject<int>() ?? -1;
+            var part2LR = feedbackJson["part2"]?["lexical resource"]?.ToObject<int>() ?? -1;
+            var part2GRA = feedbackJson["part2"]?["grammatical range and accuracy"]?.ToObject<int>() ?? -1;
+            var part2PR = feedbackJson["part2"]?["pronunciation"]?.ToObject<int>() ?? -1;
 
-// Lấy thông tin Part 3
-var part3Transcript = feedbackJson["part3"]?["transcript"]?.ToString() ?? "No answer";
-var part3Feedback = feedbackJson["part3"]?["feedback"]?.ToString() ?? "No feedback";
-var part3Score = feedbackJson["part3"]?["score"]?.ToObject<int>() ?? -1;
-var part3FC = feedbackJson["part3"]?["fluency and coherence"]?.ToObject<int>() ?? -1;
-var part3LR = feedbackJson["part3"]?["lexical resource"]?.ToObject<int>() ?? -1;
-var part3GRA = feedbackJson["part3"]?["grammatical range and accuracy"]?.ToObject<int>() ?? -1;
-var part3PR = feedbackJson["part3"]?["pronunciation"]?.ToObject<int>() ?? -1;
+            // Lấy thông tin Part 3
+            var part3Transcript = feedbackJson["part3"]?["transcript"]?.ToString() ?? "No answer";
+            var part3Feedback = feedbackJson["part3"]?["feedback"]?.ToString() ?? "No feedback";
+            var part3Score = feedbackJson["part3"]?["score"]?.ToObject<int>() ?? -1;
+            var part3FC = feedbackJson["part3"]?["fluency and coherence"]?.ToObject<int>() ?? -1;
+            var part3LR = feedbackJson["part3"]?["lexical resource"]?.ToObject<int>() ?? -1;
+            var part3GRA = feedbackJson["part3"]?["grammatical range and accuracy"]?.ToObject<int>() ?? -1;
+            var part3PR = feedbackJson["part3"]?["pronunciation"]?.ToObject<int>() ?? -1;
 
-// Tạo đối tượng chứa thông tin quan trọng
-var extractedData = new
-{
-    task1 = new
-    {
-        transcript = part1Transcript,
-        score = part1Score,
-        fc = part1FC,
-        lr = part1LR,
-        gra = part1GRA,
-        pr = part1PR,
-        feedback = part1Feedback
-    },
-    task2 = new
-    {
-        transcript = part2Transcript,
-        score = part2Score,
-        fc = part2FC,
-        lr = part2LR,
-        gra = part2GRA,
-        pr = part2PR,
-        feedback = part2Feedback
-    },
-    task3 = new
-    {
-        transcript = part3Transcript,
-        score = part3Score,
-        fc = part3FC,
-        lr = part3LR,
-        gra = part3GRA,
-        pr = part3PR,
-        feedback = part3Feedback
-    }
-};
+            // Tạo đối tượng chứa thông tin quan trọng
+            var extractedData = new
+            {
+                task1 = new
+                {
+                    transcript = part1Transcript,
+                    score = part1Score,
+                    fc = part1FC,
+                    lr = part1LR,
+                    gra = part1GRA,
+                    pr = part1PR,
+                    feedback = part1Feedback
+                },
+                task2 = new
+                {
+                    transcript = part2Transcript,
+                    score = part2Score,
+                    fc = part2FC,
+                    lr = part2LR,
+                    gra = part2GRA,
+                    pr = part2PR,
+                    feedback = part2Feedback
+                },
+                task3 = new
+                {
+                    transcript = part3Transcript,
+                    score = part3Score,
+                    fc = part3FC,
+                    lr = part3LR,
+                    gra = part3GRA,
+                    pr = part3PR,
+                    feedback = part3Feedback
+                }
+            };
 
 
-var testResult = new UserTestResults
-{
-    UserId = request.UserId, // Thay đổi theo ID người dùng thực tế
-    TestId = request.TestId, // Thay đổi theo ID bài kiểm tra thực tế
-    Accuracy = 0, // Chưa có thông tin này từ API
-    Score = (float)(part1Score + part2Score + part3Score) / 3, // Tính điểm trung bình của cả hai bài kiểm tra
-    TestType = "Speaking",
-    TimeTaken = request.TimeTaken, // Chưa có thông tin này từ API
-    TestDate = DateTime.Now,
-};
+            var testResult = new UserTestResults
+            {
+                UserId = request.UserId, // Thay đổi theo ID người dùng thực tế
+                TestId = request.TestId, // Thay đổi theo ID bài kiểm tra thực tế
+                Accuracy = 0, // Chưa có thông tin này từ API
+                Score = (float)(part1Score + part2Score + part3Score) / 3, // Tính điểm trung bình của cả hai bài kiểm tra
+                TestType = "Speaking",
+                TimeTaken = request.TimeTaken, // Chưa có thông tin này từ API
+                TestDate = DateTime.Now,
+            };
 
-_context.UserTestResults.Add(testResult);
-await _context.SaveChangesAsync();
+            _context.UserTestResults.Add(testResult);
+            await _context.SaveChangesAsync();
 
-// Trả về kết quả
-return Ok(extractedData);
+            // Trả về kết quả
+            return Ok(extractedData);
         }
+        [HttpPost("create")]
+public async Task<IActionResult> CreateWritingTest([FromBody] SpeakingTestRequest request)
+{
+    // Tạo đối tượng WritingTest (bạn cần có model WritingTest trong Models)
+    var speakingTest = new ListeningTest
+    {
+        Title = request.Title,
+        Duration = 15, // Thời gian làm bài (có thể thay đổi)
+        Type = "Speaking", // Loại bài kiểm tra
+        CreatedAt = DateTime.Now
+    };
+
+    _context.ListeningTests.Add(speakingTest);
+    await _context.SaveChangesAsync();
+
+    var task1 = new ListeningRecording
+    {
+        Title = "Task 1",
+        TestId = speakingTest.Id,
+        Passage = request.Task1, // Nội dung của Task 1
+    };
+    var task2 = new ListeningRecording
+    {
+        Title = "Task 2",
+        TestId = speakingTest.Id,
+        Passage = request.Task2, // Nội dung của Task 2
+    };
+    var task3 = new ListeningRecording
+    {
+        Title = "Task 3",
+        TestId = speakingTest.Id,
+        Passage = request.Task3, // Nội dung của Task 3
+    };
+
+    _context.ListeningRecordings.Add(task1);
+    _context.ListeningRecordings.Add(task2);
+    _context.ListeningRecordings.Add(task3);
+    await _context.SaveChangesAsync();
+
+    return Ok(new { message = "Speaking test created successfully", id = speakingTest.Id });
+}
+
+        // Model nhận dữ liệu từ frontend
+        public class SpeakingTestRequest
+        {
+            public string Title { get; set; }
+            public string Task1 { get; set; }
+            public string Task2 { get; set; }
+            public string Task3 { get; set; } // Thêm Task 3 nếu cần thiết
+}
     }
 
     // Model nhận dữ liệu từ frontend

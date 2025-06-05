@@ -40,7 +40,7 @@ namespace MyMvcBackend.Controllers
 
             // Khởi tạo HttpClient
             using var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
             client.DefaultRequestHeaders.Add("HTTP-Referer", "http://localhost:8080");
             client.DefaultRequestHeaders.Add("X-Title", "MyIELTSApp");
 

@@ -1,11 +1,11 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\23c07c92-1774-462a-bc95-02ffa49ec242.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\53230782-1325-4327-b5f9-d83a6977bd9b.mp3'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/23c07c92-1774-462a-bc95-02ffa49ec242.mp3</RelativePath>
+      <RelativePath>audio/53230782-1325-4327-b5f9-d83a6977bd9b.mp3</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -16,32 +16,14 @@
       <Integrity>WUE+rE/KfyEn3G12FkTzBVH4rjrMKPCaacf72vN7+9U=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\23c07c92-1774-462a-bc95-02ffa49ec242.mp3'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\53230782-1325-4327-b5f9-d83a6977bd9b.mp3'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\31b67664-4782-4695-8dca-f8a5310147e0.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\74c5d3cf-eec2-4b59-8b1b-78bf625bea72.mp3'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/31b67664-4782-4695-8dca-f8a5310147e0.mp3</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>2n9easgzes</Fingerprint>
-      <Integrity>st2ZQVHxO72EZGyKWkLdzbtPusXli5+6RlYZLYiocuk=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\31b67664-4782-4695-8dca-f8a5310147e0.mp3'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\5c96a73e-6da2-4ff2-bd25-d48baee30c3a.mp3'))">
-      <SourceType>Package</SourceType>
-      <SourceId>MyMvcBackend</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/5c96a73e-6da2-4ff2-bd25-d48baee30c3a.mp3</RelativePath>
+      <RelativePath>audio/74c5d3cf-eec2-4b59-8b1b-78bf625bea72.mp3</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -52,32 +34,14 @@
       <Integrity>d0wP0hDvRTn7oAUwcKfMEAXXL0DkEfURy2+837kLzG8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\5c96a73e-6da2-4ff2-bd25-d48baee30c3a.mp3'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\74c5d3cf-eec2-4b59-8b1b-78bf625bea72.mp3'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\661d1fc0-e9f7-45e6-96e4-f8035b98e010.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\83899a85-4305-4da3-9f1c-946dab9cda38.m4a'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/661d1fc0-e9f7-45e6-96e4-f8035b98e010.mp3</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>2n9easgzes</Fingerprint>
-      <Integrity>st2ZQVHxO72EZGyKWkLdzbtPusXli5+6RlYZLYiocuk=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\661d1fc0-e9f7-45e6-96e4-f8035b98e010.mp3'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\93b0c466-edab-4e36-8e73-3f51ab6e01cb.m4a'))">
-      <SourceType>Package</SourceType>
-      <SourceId>MyMvcBackend</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/93b0c466-edab-4e36-8e73-3f51ab6e01cb.m4a</RelativePath>
+      <RelativePath>audio/83899a85-4305-4da3-9f1c-946dab9cda38.m4a</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -88,14 +52,14 @@
       <Integrity>MTOPW6V39ymN6koi2VScrneSUuwknk8tlNzJWapIPK0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\93b0c466-edab-4e36-8e73-3f51ab6e01cb.m4a'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\83899a85-4305-4da3-9f1c-946dab9cda38.m4a'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\a72db449-aa1f-45fe-a3ee-a87a81489d56.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\b34913d3-bff7-40d9-8ee8-b9db3037c1e0.mp3'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/a72db449-aa1f-45fe-a3ee-a87a81489d56.mp3</RelativePath>
+      <RelativePath>audio/b34913d3-bff7-40d9-8ee8-b9db3037c1e0.mp3</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -106,50 +70,68 @@
       <Integrity>d0wP0hDvRTn7oAUwcKfMEAXXL0DkEfURy2+837kLzG8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\a72db449-aa1f-45fe-a3ee-a87a81489d56.mp3'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\b34913d3-bff7-40d9-8ee8-b9db3037c1e0.mp3'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\af8fd60e-2da6-4bd5-b254-9ad2656a55b9.m4a'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\f18ec1c9-c589-4a4a-90e1-d9c6e72a9201.m4a'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/af8fd60e-2da6-4bd5-b254-9ad2656a55b9.m4a</RelativePath>
+      <RelativePath>audio/f18ec1c9-c589-4a4a-90e1-d9c6e72a9201.m4a</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vs8hqvtqlp</Fingerprint>
-      <Integrity>MTOPW6V39ymN6koi2VScrneSUuwknk8tlNzJWapIPK0=</Integrity>
+      <Fingerprint>e4wndie97w</Fingerprint>
+      <Integrity>oiiobqBAiYLqZ3ZfBI+zSMactckRxWIMpfQbrYW3gk4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\af8fd60e-2da6-4bd5-b254-9ad2656a55b9.m4a'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\f18ec1c9-c589-4a4a-90e1-d9c6e72a9201.m4a'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\c86d3bba-6b26-4c19-b8d3-c109bee98a1b.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\f4751118-5ade-46d9-9d1c-7b84381d9d03.m4a'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/c86d3bba-6b26-4c19-b8d3-c109bee98a1b.mp3</RelativePath>
+      <RelativePath>audio/f4751118-5ade-46d9-9d1c-7b84381d9d03.m4a</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>2n9easgzes</Fingerprint>
-      <Integrity>st2ZQVHxO72EZGyKWkLdzbtPusXli5+6RlYZLYiocuk=</Integrity>
+      <Fingerprint>e4wndie97w</Fingerprint>
+      <Integrity>oiiobqBAiYLqZ3ZfBI+zSMactckRxWIMpfQbrYW3gk4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\c86d3bba-6b26-4c19-b8d3-c109bee98a1b.mp3'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\f4751118-5ade-46d9-9d1c-7b84381d9d03.m4a'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\e9d786e2-6656-4a94-a7bd-4760711fb71f.mp3'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\fa2c388d-74ea-424d-870a-4468181e0d1e.m4a'))">
       <SourceType>Package</SourceType>
       <SourceId>MyMvcBackend</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/MyMvcBackend</BasePath>
-      <RelativePath>audio/e9d786e2-6656-4a94-a7bd-4760711fb71f.mp3</RelativePath>
+      <RelativePath>audio/fa2c388d-74ea-424d-870a-4468181e0d1e.m4a</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>adiosj0he0</Fingerprint>
+      <Integrity>AoXW8Lib2OimFi+V8GAAH4K/5TL49f0MJ12v9ReYZnM=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\fa2c388d-74ea-424d-870a-4468181e0d1e.m4a'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-1.mp3'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyMvcBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyMvcBackend</BasePath>
+      <RelativePath>audio/Listening-Test-1-Section-1.mp3</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -160,7 +142,61 @@
       <Integrity>WUE+rE/KfyEn3G12FkTzBVH4rjrMKPCaacf72vN7+9U=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\e9d786e2-6656-4a94-a7bd-4760711fb71f.mp3'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-1.mp3'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-2.mp3'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyMvcBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyMvcBackend</BasePath>
+      <RelativePath>audio/Listening-Test-1-Section-2.mp3</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>dyh05ts40w</Fingerprint>
+      <Integrity>GywsqTmRq0aVLy1NbCYn7T/Ju8NK6g31497OCs0W5E8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-2.mp3'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-3.mp3'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyMvcBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyMvcBackend</BasePath>
+      <RelativePath>audio/Listening-Test-1-Section-3.mp3</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>h2z0uln9d6</Fingerprint>
+      <Integrity>d0wP0hDvRTn7oAUwcKfMEAXXL0DkEfURy2+837kLzG8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-3.mp3'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-4.mp3'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyMvcBackend</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyMvcBackend</BasePath>
+      <RelativePath>audio/Listening-Test-1-Section-4.mp3</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>2n9easgzes</Fingerprint>
+      <Integrity>st2ZQVHxO72EZGyKWkLdzbtPusXli5+6RlYZLYiocuk=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\audio\Listening-Test-1-Section-4.mp3'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))">
       <SourceType>Package</SourceType>
